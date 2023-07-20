@@ -4,7 +4,6 @@ import { NavLink, Link } from 'react-router-dom';
 
 const GetPosts = () => {
     const [posts, setPosts] = useState([]);
-    console.log(posts)
     useEffect(() => {
         const fetchPosts = async () => {
             try {

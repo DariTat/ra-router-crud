@@ -29,10 +29,24 @@ const EditPost = () => {
         e.preventDefault();
         if (content === '') return;
         const post = {id: params.id, content: content};
-        fetch(`http://localhost:7070/posts/${params.id}`, { method: 'PUT', 
-          body: JSON.stringify(post)})
-        navigate(`/posts/${params.id}`);
-        
+        const fetchPost = async () => {
+        try { 
+            const response = fetch(`http://localhost:7070/posts/${params.id}`, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json'
+                }, 
+                body: JSON.stringify(post)})
+            if ((await response).ok) {
+                navigate(`/posts/${params.id}`);
+            } else {
+                console.error('Failed to update post', (await response).statusText);
+            }
+            } catch (error) {
+                console.log('Failed to send request:', error);
+            }
+        }
+        fetchPost();
     }
     return (
         <div className="edit_post" onSubmit={onSend}>

@@ -18,13 +18,11 @@ const CreatePost = () => {
         fetch("http://localhost:7070/posts", { method: 'POST', 
           body: JSON.stringify(post)})
         setContent('');
-        navigate('/');
-        
+        navigate('/'); 
     }
 
     return(
         <>
-        
         <form className="add_post" onSubmit={handleSubmit} >
             <NavLink to='/'>X</NavLink>
             <input type='text' name='content' value={content} onChange={handleContent}/>
